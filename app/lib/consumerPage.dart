@@ -1,4 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:thinkforliving/module/consumer.dart';
+
+import 'module/product.dart';
 
 class ConsumerPage extends StatefulWidget {
   static const String pageId = 'ConsumerPage';
@@ -12,16 +16,90 @@ class _ConsumerPageState extends State<ConsumerPage> {
   String _entityName;
   String _entityEmail;
   String _entityPhone;
-  String _entityRequirement;
+  List<Product> _products = [];
+  final List<Widget> _productsWidgets = [];
 
   void _validateAndSave() {
     final FormState form = _formKey.currentState;
     if (form.validate()) {
       form.save();
-      return;
+      Consumer consumer = Consumer(
+        name: _entityName,
+        email: _entityEmail,
+        phone: _entityPhone,
+        products: _products,
+      );
+      Firestore.instance.collection('consumers').add(consumer.toMap());
+      print('add to db');
     }
 
     return;
+  }
+
+  List<Widget> getInfoWidgets() {
+    return <Widget>[
+      TextFormField(
+        decoration: InputDecoration(
+          hintText: 'Name',
+        ),
+        onSaved: (String value) => _entityName = value,
+      ),
+      TextFormField(
+        decoration: InputDecoration(
+          hintText: 'Email',
+        ),
+        onSaved: (String value) => _entityEmail = value,
+      ),
+      TextFormField(
+        decoration: InputDecoration(
+          hintText: 'Phone',
+        ),
+        onSaved: (String value) => _entityPhone = value,
+      ),
+      Divider(
+        color: Colors.grey,
+      ),
+    ];
+  }
+
+  List<Widget> getProductAddButtonWidgets() {
+    return <Widget>[
+      Divider(
+        color: Colors.grey,
+      ),
+      RaisedButton(
+        onPressed: () {
+          setState(() {
+            _productsWidgets.add(
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'Product',
+                ),
+                onSaved: (String value) => _products.add(
+                  Product(
+                    productName: value,
+                  ),
+                ),
+              ),
+            );
+          });
+        },
+        child: Text(
+          'Add Product',
+        ),
+      ),
+    ];
+  }
+
+  List<Widget> getSubmitButtonWidgets() {
+    return <Widget>[
+      RaisedButton(
+        onPressed: () => _validateAndSave(),
+        child: Text(
+          'Submit',
+        ),
+      ),
+    ];
   }
 
   @override
@@ -39,38 +117,10 @@ class _ConsumerPageState extends State<ConsumerPage> {
           child: Form(
             key: _formKey,
             child: ListView(
-              children: <Widget>[
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Entity Name',
-                  ),
-                  onSaved: (String value) => _entityName = value,
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Entity Email',
-                  ),
-                  onSaved: (String value) => _entityEmail = value,
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Entity Phone',
-                  ),
-                  onSaved: (String value) => _entityPhone = value,
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Entity Requirement',
-                  ),
-                  onSaved: (String value) => _entityRequirement = value,
-                ),
-                RaisedButton(
-                  onPressed: () => _validateAndSave(),
-                  child: Text(
-                    'Submit',
-                  ),
-                ),
-              ],
+              children: getInfoWidgets() +
+                  _productsWidgets +
+                  getProductAddButtonWidgets() +
+                  getSubmitButtonWidgets(),
             ),
           ),
         ),
