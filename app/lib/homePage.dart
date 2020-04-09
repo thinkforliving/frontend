@@ -46,10 +46,10 @@ class _HomePageState extends State<HomePage> {
           child: ListView(
             children: <Widget>[
               SizedBox(
-                height: MediaQuery.of(context).size.height / 5,
+                height: 24,
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height / 5,
+                height: 24,
                 child: RaisedButton(
                   onPressed: () {
                     Navigator.pushNamed(
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height / 5,
+                height: 24,
                 child: RaisedButton(
                   onPressed: () {
                     Navigator.pushNamed(
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height / 5,
+                height: 24,
                 child: RaisedButton(
                   onPressed: () {
                     Navigator.pushNamed(
@@ -86,6 +86,9 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.orange,
                   child: Text('Supplier'),
                 ),
+              ),
+              SizedBox(
+                height: 24,
               ),
             ],
           ),

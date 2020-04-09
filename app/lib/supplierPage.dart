@@ -10,6 +10,19 @@ class SupplierPage extends StatefulWidget {
 class _SupplierPageState extends State<SupplierPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        title: Text(
+          'Supplier Register',
+        ),
+      ),
+      body: Container(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 24.0),
+          child: Form(),
+        ),
+      ),
+    );
   }
 }

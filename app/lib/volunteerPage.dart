@@ -10,6 +10,19 @@ class VolunteerPage extends StatefulWidget {
 class _VolunteerPageState extends State<VolunteerPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        title: Text(
+          'Volunteer Register',
+        ),
+      ),
+      body: Container(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 24.0),
+          child: Form(),
+        ),
+      ),
+    );
   }
 }

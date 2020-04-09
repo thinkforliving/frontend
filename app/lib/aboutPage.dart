@@ -10,6 +10,19 @@ class AboutPage extends StatefulWidget {
 class _AboutPageState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        title: Text(
+          'About Us',
+        ),
+      ),
+      body: Container(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 24.0),
+          child: Form(),
+        ),
+      ),
+    );
   }
 }
