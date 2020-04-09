@@ -56,17 +56,11 @@ class _ConsumerPageState extends State<ConsumerPage> {
         ),
         onSaved: (String value) => _entityPhone = value,
       ),
-      Divider(
-        color: Colors.grey,
-      ),
     ];
   }
 
   List<Widget> getProductAddButtonWidgets() {
     return <Widget>[
-      Divider(
-        color: Colors.grey,
-      ),
       RaisedButton(
         onPressed: () {
           setState(() {
